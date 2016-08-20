@@ -71,7 +71,9 @@ public class MainActivity extends AppCompatActivity
                         .setSmallIcon(R.mipmap.ic_launcher)
                         .setWhen(System.currentTimeMillis())
                         .setContentText("Android Notifications")
-                        .setContentIntent(resultPendingIntent);
+                        .setContentIntent(resultPendingIntent)
+                        .setContentTitle("Maximum priority notification")
+                        .setPriority(Notification.PRIORITY_MAX);
                 sendNotification(builder.build());
             }
         });

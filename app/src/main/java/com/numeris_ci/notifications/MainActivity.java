@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private Button btnMaxPriorityNotification;
     private Button btnHighPriorityNotification;
+    private Button btnLowPriorityNotification;
 
     private int NOTIF_REF = 1;
     private NotificationManager manager;
@@ -56,6 +57,7 @@ public class MainActivity extends AppCompatActivity
 
         btnMaxPriorityNotification = (Button) findViewById(R.id.btnMaxPriorityNotification);
         btnHighPriorityNotification = (Button) findViewById(R.id.btnHighPriorityNotification);
+        btnLowPriorityNotification = (Button) findViewById(R.id.btnLowPriorityNotification);
 
         manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
@@ -97,6 +99,24 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+        btnLowPriorityNotification.setOnClickListener(new View.OnClickListener() {
+            @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+            @Override
+            public void onClick(View v) {
+                Notification notif = null;
+                Intent resultIntent = new Intent(MainActivity.this, ResultActivity.class);
+                PendingIntent resultPendingIntent = PendingIntent.getActivity(MainActivity.this, 0,
+                        resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+                Notification.Builder builder = new Notification.Builder(MainActivity.this)
+                        .setSmallIcon(R.mipmap.ic_launcher)
+                        .setWhen(System.currentTimeMillis())
+                        .setContentText("Android Notifications")
+                        .setContentIntent(resultPendingIntent)
+                        .setContentTitle("Low priority notification")
+                        .setPriority(Notification.PRIORITY_LOW);
+                sendNotification(builder.build());
+            }
+        });
     }
 
     @Override

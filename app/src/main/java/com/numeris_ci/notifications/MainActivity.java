@@ -1,10 +1,15 @@
 package com.numeris_ci.notifications;
 
+import android.annotation.TargetApi;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -12,9 +17,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    private Button btnMaxPriorityNotification;
+
+    private int NOTIF_REF = 1;
+    private NotificationManager manager;
+    private int count = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +52,26 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        btnMaxPriorityNotification = (Button) findViewById(R.id.btnMaxPriorityNotification);
+        manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        btnMaxPriorityNotification.setOnClickListener(new View.OnClickListener() {
+            @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+            @Override
+            public void onClick(View v) {
+                Notification notif = null;
+                Intent resultIntent = new Intent(MainActivity.this, ResultActivity.class);
+                PendingIntent resultPendingIntent = PendingIntent.getActivity(MainActivity.this, 0,
+                        resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+                Notification.Builder builder = new Notification.Builder(MainActivity.this)
+                        .setSmallIcon(R.mipmap.ic_launcher)
+                        .setWhen(System.currentTimeMillis())
+                        .setContentText("Android Notifications")
+                        .setContentIntent(resultPendingIntent);
+                sendNotification(builder.build());
+            }
+        });
+
     }
 
     @Override
@@ -97,5 +129,9 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void sendNotification(Notification notif) {
+        manager.notify(NOTIF_REF++, notif);
     }
 }

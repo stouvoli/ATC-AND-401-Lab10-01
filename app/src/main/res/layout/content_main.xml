@@ -52,36 +52,34 @@
                 android:text="@string/low_priority" />
 
             <Button
-                android:layout_width="wrap_content"
+                android:id="@+id/btnMinPriorityNotification"
+                android:layout_width="180dp"
                 android:layout_height="wrap_content"
-                android:text="New Button"
-                android:id="@+id/button4"
-                android:layout_below="@+id/button3"
-                android:layout_centerHorizontal="true" />
+                android:text="@string/min_priority" />
 
             <Button
-                android:layout_width="wrap_content"
+                android:id="@+id/btnDefaultNotification"
+                android:layout_width="180dp"
                 android:layout_height="wrap_content"
-                android:text="New Button"
-                android:id="@+id/button5"
-                android:layout_below="@+id/button4"
-                android:layout_centerHorizontal="true" />
+                android:text="@string/default_priority" />
 
             <Button
-                android:layout_width="wrap_content"
+                android:id="@+id/btnBigTextNotification"
+                android:layout_width="180dp"
                 android:layout_height="wrap_content"
-                android:text="New Button"
-                android:id="@+id/button6"
-                android:layout_below="@+id/button5"
-                android:layout_centerHorizontal="true" />
+                android:text="@string/big_text" />
 
             <Button
-                android:layout_width="wrap_content"
+                android:id="@+id/btnBigImageNotification"
+                android:layout_width="180dp"
                 android:layout_height="wrap_content"
-                android:text="New Button"
-                android:id="@+id/button7"
-                android:layout_below="@+id/button6"
-                android:layout_centerHorizontal="true" />
+                android:text="@string/big_picture" />
+
+            <Button
+                android:id="@+id/btnInboxTypeNotification"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:text="@string/inbox_type" />
         </LinearLayout>
     </ScrollView>
 
